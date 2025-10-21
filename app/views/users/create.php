@@ -14,7 +14,7 @@
       font-family: "Poppins", sans-serif;
     }
 
-    /* Background Gradient */
+    /* === Animated Violet-Orange Gradient Background === */
     section {
       position: relative;
       display: flex;
@@ -23,23 +23,31 @@
       width: 100%;
       height: 100vh;
       overflow: hidden;
-      background: linear-gradient(135deg, #a259ff, #38bdf8);
+      background: linear-gradient(-45deg, #a855f7, #fb923c, #7c3aed, #f97316);
+      background-size: 400% 400%;
+      animation: gradientMove 10s ease infinite;
     }
 
-    /* Hide old design elements */
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* === Hide old images & leaves === */
     section .bg,
     section .trees,
     .leaves {
       display: none;
     }
 
-    /* Form Container */
+    /* === Glassmorphism Form === */
     .login {
       position: relative;
       padding: 60px;
       background: rgba(255, 255, 255, 0.2);
       backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.3);
       border-radius: 20px;
       width: 500px;
       display: flex;
@@ -53,10 +61,11 @@
       text-align: center;
       font-size: 2.5em;
       font-weight: 600;
-      color: #4c1d95; /* deep violet */
+      color: #6d28d9;
       margin-bottom: 10px;
     }
 
+    /* === Input Fields === */
     .login .inputBox input,
     .login .inputBox select {
       width: 100%;
@@ -71,16 +80,16 @@
     }
 
     .login .inputBox ::placeholder {
-      color: #4c1d95;
+      color: #6d28d9;
     }
 
-    /* Button */
+    /* === Button === */
     .login .inputBox #btn {
       width: 100%;
       padding: 15px;
       border: none;
       outline: none;
-      background: linear-gradient(135deg, #7c3aed, #38bdf8);
+      background: linear-gradient(135deg, #7c3aed, #f97316);
       color: #fff;
       cursor: pointer;
       font-size: 1.25em;
@@ -90,10 +99,27 @@
     }
 
     .login .inputBox #btn:hover {
-      background: linear-gradient(135deg, #5b21b6, #0ea5e9);
+      background: linear-gradient(135deg, #5b21b6, #ea580c);
+      transform: scale(1.02);
     }
 
-    /* Error Message */
+    /* === Text Links === */
+    .group {
+      text-align: center;
+    }
+
+    .group a {
+      font-size: 1em;
+      color: #5b21b6;
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    .group a:hover {
+      text-decoration: underline;
+    }
+
+    /* === Error Box === */
     .error-box {
       background: rgba(255, 0, 0, 0.1);
       color: #d64c42;
@@ -106,21 +132,15 @@
       font-size: 15px;
     }
 
-    /* Eye Icon Styling */
-    .toggle-eye {
-      position: absolute;
-      right: 15px;
-      top: 35%;
-      transform: translateY(-50%);
-      cursor: pointer;
-      color: #4c1d95;
-      font-size: 1.2em;
+    /* === Eye Icon === */
+    .fa-eye, .fa-eye-slash {
+      color: #6d28d9;
     }
   </style>
 </head>
 <body>
   <section>
-    <!-- Create User Form -->
+    <!-- Create Form -->
     <div class="login">
       <h2>Create User</h2>
 
@@ -138,14 +158,16 @@
         <div style="position: relative;">
           <input type="password" id="password" name="password" placeholder="Password" required
             style="width: 100%; padding: 15px 45px 15px 20px; border-radius: 5px; border: none; font-size: 1.1em;">
-          <i class="fa-solid fa-eye toggle-eye" id="togglePassword"></i>
+          <i class="fa-solid fa-eye" id="togglePassword"
+            style="position: absolute; right: 15px; top: 35%; transform: translateY(-50%); cursor: pointer;"></i>
         </div>
 
         <!-- Confirm Password -->
         <div style="position: relative;">
           <input type="password" id="confirmPassword" name="confirm_password" placeholder="Confirm Password" required
             style="width: 100%; padding: 15px 45px 15px 20px; border-radius: 5px; border: none; font-size: 1.1em;">
-          <i class="fa-solid fa-eye toggle-eye" id="toggleConfirmPassword"></i>
+          <i class="fa-solid fa-eye" id="toggleConfirmPassword"
+            style="position: absolute; right: 15px; top: 35%; transform: translateY(-50%); cursor: pointer;"></i>
         </div>
 
         <!-- Role -->
@@ -164,11 +186,9 @@
     function toggleVisibility(toggleId, inputId) {
       const toggle = document.getElementById(toggleId);
       const input = document.getElementById(inputId);
-
       toggle.addEventListener('click', function () {
         const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
         input.setAttribute('type', type);
-
         this.classList.toggle('fa-eye');
         this.classList.toggle('fa-eye-slash');
       });
