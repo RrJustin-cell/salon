@@ -16,6 +16,7 @@
       font-family: "Poppins", sans-serif;
     }
 
+    /* Background Gradient using your palette */
     section {
       position: relative;
       display: flex;
@@ -23,65 +24,57 @@
       align-items: center;
       width: 100%;
       height: 100vh;
-      overflow: hidden;
+      background: linear-gradient(135deg, #F8B195, #F67280, #C06C84, #6C5B7B, #355C7D);
+      background-size: 400% 400%;
+      animation: gradientMove 10s ease infinite;
     }
 
-    section .bg,
-    section .trees {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      pointer-events: none;
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
-    section .trees {
-      z-index: 100;
-    }
-
+    /* Login Box */
     .login {
-      position: relative;
-      padding: 60px;
-      background: rgba(255, 255, 255, 0.25);
-      backdrop-filter: blur(15px);
-      border: 1px solid #fff;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-      border-right: 1px solid rgba(255, 255, 255, 0.5);
+      background: #ffffff;
+      padding: 50px;
       border-radius: 20px;
-      width: 500px;
+      width: 400px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
       display: flex;
       flex-direction: column;
-      gap: 30px;
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
-      z-index: 200;
+      gap: 25px;
     }
 
     .login h2 {
       text-align: center;
-      font-size: 2.5em;
+      font-size: 2em;
       font-weight: 600;
-      color: #8f2c24;
+      color: #355C7D;
     }
 
     .login .inputBox {
       position: relative;
-      margin-bottom: 20px;
     }
 
     .login .inputBox input {
       width: 100%;
-      padding: 15px 45px 15px 20px;
-      font-size: 1.25em;
-      color: #8f2c24;
-      border-radius: 5px;
-      background: #fff;
-      border: none;
+      padding: 15px 45px 15px 15px;
+      font-size: 1em;
+      border: 2px solid #C06C84;
+      border-radius: 8px;
+      outline: none;
+      color: #355C7D;
+      transition: 0.3s;
+    }
+
+    .login .inputBox input:focus {
+      border-color: #6C5B7B;
     }
 
     .login .inputBox ::placeholder {
-      color: #8f2c24;
+      color: #999;
     }
 
     .toggle-password {
@@ -90,25 +83,26 @@
       top: 50%;
       transform: translateY(-50%);
       cursor: pointer;
-      font-size: 1.2em;
-      color: #8f2c24;
+      font-size: 1.1em;
+      color: #6C5B7B;
     }
 
     .login button {
       width: 100%;
-      padding: 15px;
+      padding: 14px;
       border: none;
-      background: #8f2c24;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #F67280, #C06C84);
       color: #fff;
-      font-size: 1.25em;
+      font-size: 1.1em;
       font-weight: 500;
-      border-radius: 5px;
       cursor: pointer;
       transition: 0.3s;
     }
 
     .login button:hover {
-      background: #d64c42;
+      background: linear-gradient(135deg, #C06C84, #6C5B7B);
+      transform: translateY(-2px);
     }
 
     .group {
@@ -116,85 +110,36 @@
     }
 
     .group a {
-      font-size: 1em;
-      color: #8f2c24;
-      font-weight: 500;
+      font-size: 0.95em;
+      color: #355C7D;
       text-decoration: none;
+      font-weight: 500;
     }
 
     .group a:hover {
       text-decoration: underline;
     }
 
-    /* Leaves animation */
-    .leaves {
-      position: absolute;
-      width: 100%;
-      height: 100vh;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 1;
-      pointer-events: none;
-    }
-
-    .leaves .set {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-    }
-
-    .leaves .set div {
-      position: absolute;
-      display: block;
-    }
-
-    .leaves .set div:nth-child(1) { left: 20%; animation: animate 20s linear infinite; }
-    .leaves .set div:nth-child(2) { left: 50%; animation: animate 14s linear infinite; }
-    .leaves .set div:nth-child(3) { left: 70%; animation: animate 12s linear infinite; }
-    .leaves .set div:nth-child(4) { left: 5%;  animation: animate 15s linear infinite; }
-    .leaves .set div:nth-child(5) { left: 85%; animation: animate 18s linear infinite; }
-    .leaves .set div:nth-child(6) { left: 90%; animation: animate 12s linear infinite; }
-    .leaves .set div:nth-child(7) { left: 15%; animation: animate 14s linear infinite; }
-    .leaves .set div:nth-child(8) { left: 60%; animation: animate 15s linear infinite; }
-
-    @keyframes animate {
-      0% { opacity: 0; top: -10%; transform: translateX(20px) rotate(0deg); }
-      10% { opacity: 1; }
-      20% { transform: translateX(-20px) rotate(45deg); }
-      40% { transform: translateX(-20px) rotate(90deg); }
-      60% { transform: translateX(20px) rotate(180deg); }
-      80% { transform: translateX(-20px) rotate(45deg); }
-      100% { top: 110%; transform: translateX(20px) rotate(225deg); }
+    /* Error message */
+    .error-box {
+      background: rgba(255, 0, 0, 0.1);
+      color: #d64c42;
+      padding: 10px;
+      border: 1px solid #d64c42;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      text-align: center;
+      font-size: 0.9em;
     }
   </style>
 </head>
 <body>
   <section>
-    <div class="leaves">
-      <div class="set">
-        <div><img src="/public/images/leaf_03.png"></div>
-        <div><img src="/public/images/leaf_02.png"></div>
-        <div><img src="/public/images/leaf_03.png"></div>
-        <div><img src="/public/images/leaf_04.png"></div>
-        <div><img src="/public/images/leaf_01.png"></div>
-        <div><img src="/public/images/leaf_02.png"></div>
-        <div><img src="/public/images/leaf_03.png"></div>
-        <div><img src="/public/images/leaf_04.png"></div>
-      </div>
-    </div>
-
-    <img src="/public/images/bg.jpg" class="bg">
-    <img src="/public/images/trees.png" class="trees">
-
     <div class="login">
       <h2>Login</h2>
 
       <?php if (!empty($error)): ?>
-        <div style="background: rgba(255,0,0,0.1); color: #d64c42; padding: 10px; border: 1px solid #d64c42; border-radius: 5px; margin-bottom: 15px; text-align: center; font-size: 0.95em;">
+        <div class="error-box">
           <?= $error ?>
         </div>
       <?php endif; ?>
@@ -227,8 +172,6 @@
     togglePassword.addEventListener('click', function () {
       const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
       password.setAttribute('type', type);
-
-      // Toggle between fa-eye and fa-eye-slash
       this.classList.toggle('fa-eye');
       this.classList.toggle('fa-eye-slash');
     });
