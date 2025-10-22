@@ -1,183 +1,348 @@
+index
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>User Management</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Users Info</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Poppins", sans-serif;
-    }
-
     body {
       min-height: 100vh;
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #e6fff0, #bfffd8, #deffe9); /* light green gradient */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 25px;
+    }
+
+    .glass-container {
+      width: 95%;
+      max-width: 1100px;
+      padding: 40px;
+      background: rgba(240, 255, 245, 0.75);
+      backdrop-filter: blur(16px);
+      border-radius: 18px;
+      box-shadow: 0 12px 30px rgba(51, 214, 132, 0.25);
+      border: 1px solid rgba(182, 255, 193, 0.6);
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 30px;
+      color: #33d684; /* green */
+      letter-spacing: 1px;
+    }
+
+    .user-status {
+      background: #e8fff0;
+      border: 1px solid #b0ffc8;
+      padding: 12px 20px;
+      border-radius: 12px;
+      margin: 0 auto 25px;
+      text-align: center;
+      width: fit-content;
+      font-size: 15px;
+      color: #2bb36b;
+      box-shadow: 0 4px 10px rgba(182, 255, 193, 0.25);
+    }
+    .user-status.error {
+      background: #f0fff5;
+      border: 1px solid #b0ffc8;
+      color: #2bb36b;
+    }
+    .user-status strong { font-weight: 600; }
+    .user-status .username { color: #33d684; font-weight: 600; }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-bottom: 25px;
+    }
+    .logout-btn {
+      padding: 10px 20px;
+      background: linear-gradient(135deg, #4dff94, #33d684);
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      color: #fff;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .logout-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(51, 214, 132, 0.3);
+    }
+
+    .search-form {
+      display: flex;
+      gap: 8px;
+      flex: 1;
+      max-width: 350px;
+      background: #f0fff5;
+      border: 1px solid #b0ffc8;
+      padding: 6px 10px;
+      border-radius: 10px;
+      box-shadow: inset 0 2px 6px rgba(182, 255, 193, 0.25);
+      position: relative;
+    }
+    .search-form input {
+      border: none;
+      background: transparent;
+      flex: 1;
+      padding: 6px;
+      font-size: 14px;
+      color: #2bb36b;
+    }
+    .search-form input:focus { outline: none; }
+    .search-form button {
+      padding: 6px 14px;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 6px;
+      border: none;
+      background: #33d684;
+      color: #fff;
+      transition: 0.3s ease;
+    }
+    .search-form button:hover { background: #4dff94; }
+
+    #clearSearch {
+      background: transparent;
+      border: none;
+      color: #33d684;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      padding: 0 6px;
+      line-height: 1;
+      transition: color 0.2s ease;
+    }
+    #clearSearch:hover { color: #4dff94; }
+
+    .table-responsive {
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 25px;
+      box-shadow: 0 6px 18px rgba(182, 255, 193, 0.3);
+    }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 14px; text-align: center; font-size: 14px; }
+    th {
+      background: linear-gradient(135deg, #4dff94, #33d684);
+      color: #fff;
+      text-transform: uppercase;
+      font-size: 13px;
+      letter-spacing: 0.05em;
+    }
+    td { border-bottom: 1px solid #e4fff0; background: #fff; color: #444; }
+    tr:nth-child(even) td { background: #f0fff5; }
+    tr:hover td { background: #e6fff0; }
+
+    a { padding: 6px 12px; border-radius: 6px; font-size: 13px; font-weight: 600; text-decoration: none; margin: 0 4px; display: inline-block; transition: 0.3s ease; }
+    a[href*="update"] { background: #33d684; color: #fff; }
+    a[href*="update"]:hover { background: #2bb36b; }
+    a[href*="delete"] { background: #2bb36b; color: #fff; }
+    a[href*="delete"]:hover { background: #33d684; }
+
+    .button-container {
       display: flex;
       justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      background: linear-gradient(135deg, #7e57c2, #ff7043, #f48fb1);
-      background-size: 300% 300%;
-      animation: gradientMove 8s ease infinite;
+      margin-top: 25px;
+    }
+    .btn-create {
+      padding: 14px 40px;
+      border: none;
+      background: linear-gradient(135deg, #4dff94, #33d684);
       color: #fff;
-    }
-
-    @keyframes gradientMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    h1 {
-      font-size: 2.5em;
-      margin-bottom: 20px;
-      text-align: center;
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-    }
-
-    a {
-      color: #fff;
-      text-decoration: none;
-      transition: 0.3s;
-    }
-
-    a:hover {
-      color: #ffe0b2;
-    }
-
-    .container {
-      background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(14px);
-      border-radius: 20px;
-      padding: 30px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      width: 90%;
-      max-width: 900px;
-      overflow-x: auto;
-    }
-
-    .create-btn {
-      display: inline-block;
-      margin-bottom: 20px;
-      padding: 10px 20px;
-      background: rgba(255, 255, 255, 0.25);
-      border-radius: 8px;
+      font-size: 1.1em;
       font-weight: 500;
-      transition: all 0.3s ease;
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-
-    .create-btn:hover {
-      background: rgba(255, 255, 255, 0.35);
+    .btn-create:hover {
       transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(51, 214, 132, 0.3);
     }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      color: #fff;
+    .pagination { justify-content: center; gap: 6px; margin-top: 20px; display: flex; flex-wrap: wrap; }
+    .pagination li a, .pagination li span { padding: 8px 14px; border: 1px solid #b0ffc8; border-radius: 6px; background: #f0fff5; color: #33d684; font-size: 14px; }
+    .pagination li.active span { background: #33d684; color: #fff; border-color: #2bb36b; font-weight: bold; }
+
+    @media (max-width: 768px) {
+      .top-bar { flex-direction: column; align-items: stretch; }
+      .search-form { max-width: 100%; }
+      table { font-size: 13px; }
     }
 
-    th, td {
-      padding: 14px 18px;
-      text-align: left;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    /* Delete Modal */
+    .modal-overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(182, 255, 193, 0.5); backdrop-filter: blur(6px);
+      display: none; align-items: center; justify-content: center; z-index: 1000;
+      opacity: 0; transition: opacity 0.3s ease;
     }
-
-    th {
-      background: rgba(255, 255, 255, 0.2);
-      font-weight: 600;
-      letter-spacing: 0.5px;
+    .modal-overlay.show { display: flex; opacity: 1; }
+    .modal-content {
+      background: rgba(240, 255, 245, 0.95); padding: 30px; border-radius: 18px;
+      text-align: center; box-shadow: 0 12px 30px rgba(51, 214, 132, 0.3);
+      max-width: 400px; width: 90%; transform: translateY(-50px); transition: transform 0.3s ease;
     }
-
-    tr:hover {
-      background: rgba(255, 255, 255, 0.15);
-      transition: 0.3s;
-    }
-
-    .actions a {
-      display: inline-block;
-      margin-right: 8px;
-      padding: 6px 10px;
-      border-radius: 6px;
-      font-size: 0.9em;
-      font-weight: 500;
-      transition: 0.3s;
-    }
-
-    .actions a:first-child {
-      background: rgba(126, 87, 194, 0.6);
-    }
-
-    .actions a:first-child:hover {
-      background: rgba(126, 87, 194, 0.9);
-    }
-
-    .actions a:last-child {
-      background: rgba(255, 87, 34, 0.6);
-    }
-
-    .actions a:last-child:hover {
-      background: rgba(255, 87, 34, 0.9);
-    }
-
-    @media (max-width: 600px) {
-      th, td {
-        padding: 10px;
-        font-size: 0.9em;
-      }
-    }
+    .modal-overlay.show .modal-content { transform: translateY(0); }
+    .modal-content h3 { color: #33d684; margin-bottom: 15px; }
+    .modal-content p { margin-bottom: 25px; color: #444; }
+    .modal-buttons button { padding: 10px 20px; border: none; border-radius: 10px; font-weight: 600; margin: 0 10px; cursor: pointer; transition: 0.2s ease; }
+    .btn-cancel { background: #b0ffc8; color: #2bb36b; }
+    .btn-cancel:hover { background: #90ffb0; }
+    .btn-confirm { background: #33d684; color: #fff; }
+    .btn-confirm:hover { background: #4dff94; }
   </style>
 </head>
+
 <body>
+  <div class="glass-container">
+    <h2><?= ($logged_in_user['role'] === 'admin') ? 'Admin Dashboard' : 'User Dashboard'; ?></h2>
 
-  <h1>User Management</h1>
+    <?php if(!empty($logged_in_user)): ?>
+      <div class="user-status">
+        <strong>Welcome:</strong> 
+        <span class="username"><?= html_escape($logged_in_user['username']); ?></span>
+      </div>
+    <?php else: ?>
+      <div class="user-status error">Logged in user not found</div>
+    <?php endif; ?>
 
-  <div class="container">
-    <a href="<?= site_url('users/create'); ?>" class="create-btn"><i class="fa fa-plus"></i> Create New User</a>
+    <div class="top-bar">
+      <a href="<?=site_url('auth/logout'); ?>"><button class="logout-btn">Logout</button></a>
+      <form action="<?=site_url('users');?>" method="get" class="search-form">
+        <?php $q = isset($_GET['q']) ? $_GET['q'] : ''; ?>
+        <input id="searchInput" name="q" type="text" placeholder="Search" value="<?=html_escape($q);?>">
+        <button type="button" id="clearSearch" title="Clear Search" style="display:none;">&times;</button>
+        <button type="submit">Search</button>
+      </form>
+    </div>
 
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Username</th>
-          <th>Email</th>
-          <th>Role</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-<?php if (is_array($users) && count($users) > 0): ?>
-  <?php foreach ($users as $user): ?>
-    <tr>
-      <td><?= htmlspecialchars($user['id']); ?></td>
-      <td><?= htmlspecialchars($user['username']); ?></td>
-      <td><?= htmlspecialchars($user['email']); ?></td>
-      <td><?= htmlspecialchars($user['role']); ?></td>
-      <td class="actions">
-        <!-- support both URL styles in views: use update (preferred) OR edit (if older code expects it) -->
-        <a href="<?= site_url('/users/update/'.$user['id']);?>">Update</a>
-        <a href="<?= site_url('/users/edit/'.$user['id']);?>">Edit</a>
-        <a href="<?= site_url('/users/delete/'.$user['id']);?>" onclick="return confirm('Are you sure?')">Delete</a>
-      </td>
-    </tr>
-  <?php endforeach; ?>
-<?php else: ?>
-  <tr>
-    <td colspan="5" style="text-align:center; padding:20px;">
-      No users found or a database error occurred.
-    </td>
-  </tr>
-<?php endif; ?>
-</tbody>
+    <div class="table-responsive">
+      <?php if(!empty($users)): ?>
+        <table>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <?php if ($logged_in_user['role'] === 'admin'): ?>
+              <th>Password</th>
+              <th>Role</th>
+            <?php endif; ?>
+            <th>Action</th>
+          </tr>
+          <?php foreach ($users as $user): ?>
+          <tr>
+            <td><?=html_escape($user['id']); ?></td>
+            <td><?=html_escape($user['username']); ?></td>
+            <td><?=html_escape($user['email']); ?></td>
+            <?php if ($logged_in_user['role'] === 'admin'): ?>
+              <td>*******</td>
+              <td><?= html_escape($user['role']); ?></td>
+            <?php endif; ?>
+            <td>
+              <?php if ($logged_in_user['role'] === 'admin'): ?>
+                <a href="<?=site_url('/users/update/'.$user['id']);?>">Update</a>
+                <a href="<?=site_url('/users/delete/'.$user['id']);?>">Delete</a>
+              <?php else: ?>
+                <span class="text-muted">View Only</span>
+              <?php endif; ?>
+            </td>
+          </tr>
+          <?php endforeach; ?>
+        </table>
+      <?php else: ?>
+        <div class="alert alert-warning text-center">No users found.</div>
+      <?php endif; ?>
+    </div>
 
-    </table>
+    <div class="pagination-container">
+      <?= $page; ?>
+    </div>
+
+    <?php if ($logged_in_user['role'] === 'admin'): ?>
+      <div class="button-container">
+        <a href="<?=site_url('users/create'); ?>" class="btn-create">+ Create New User</a>
+      </div>
+    <?php endif; ?>
   </div>
 
+  <!-- Delete Confirmation Modal -->
+  <div id="deleteModal" class="modal-overlay">
+    <div class="modal-content">
+      <h3>Confirm Delete</h3>
+      <p>Are you sure you want to delete this user?</p>
+      <div class="modal-buttons">
+        <button id="cancelBtn" class="btn-cancel">Cancel</button>
+        <button id="confirmBtn" class="btn-confirm">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      let deleteUrl = null;
+      const modal = document.getElementById("deleteModal");
+      const confirmBtn = document.getElementById("confirmBtn");
+      const cancelBtn = document.getElementById("cancelBtn");
+
+      document.querySelectorAll('a[href*="delete"]').forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          deleteUrl = this.href;
+          modal.classList.add('show');
+        });
+      });
+
+      cancelBtn.addEventListener('click', function() {
+        modal.classList.remove('show');
+        deleteUrl = null;
+      });
+
+      confirmBtn.addEventListener('click', function() {
+        if (deleteUrl) {
+          window.location.href = deleteUrl;
+        }
+      });
+
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          modal.classList.remove('show');
+          deleteUrl = null;
+        }
+      });
+
+      const clearBtn = document.getElementById('clearSearch');
+      const searchInput = document.getElementById('searchInput');
+
+      function toggleClearButton() {
+        clearBtn.style.display = searchInput.value.trim() ? 'inline' : 'none';
+      }
+
+      toggleClearButton();
+      searchInput.addEventListener('input', toggleClearButton);
+
+      clearBtn.addEventListener('click', function() {
+        searchInput.value = '';
+        toggleClearButton();
+        window.location.href = '<?=site_url('users');?>';
+      });
+    });
+  </script>
 </body>
 </html>
