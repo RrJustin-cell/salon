@@ -1,4 +1,3 @@
-create
 
 <!DOCTYPE html>
 <html lang="en">
