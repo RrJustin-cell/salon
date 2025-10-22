@@ -34,28 +34,32 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
  * @license https://opensource.org/licenses/MIT MIT License
  */
 
+
 /*
 | -------------------------------------------------------------------
 | URI ROUTING
 | -------------------------------------------------------------------
-| Here is where you can register web routes for your application.
-|
-|
 */
 
-// Registration is the default page
+/* Registration is the default page */
 $router->match('/', 'UsersController::register', ['GET','POST']);
 
-// Auth routes
+/* Auth routes */
 $router->match('/auth/register', 'UsersController::register', ['GET','POST']);
 $router->match('/auth/login', 'UsersController::login', ['GET','POST']);
 $router->get('/auth/logout', 'UsersController::logout');
 
-// Homepage (after login)
+/* Homepage (after login) */
 $router->get('/users', 'UsersController::index');
 $router->get('/users/dashboard', 'UsersController::dashboard');
 
-// Users CRUD
+/* Users CRUD */
+/* create */
 $router->match('/users/create', 'UsersController::create', ['GET', 'POST']);
+
+/* update - accept both URL variants so views that use either "edit" or "update" work */
 $router->match('/users/update/{id}', 'UsersController::update', ['GET', 'POST']);
+$router->match('/users/edit/{id}',   'UsersController::update', ['GET', 'POST']); // alias -> update
+
+/* delete */
 $router->get('/users/delete/{id}', 'UsersController::delete');
