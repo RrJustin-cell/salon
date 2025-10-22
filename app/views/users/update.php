@@ -1,198 +1,166 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Update User</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Poppins", sans-serif;
-    }
+update
 
-    /* Animated Violet-Orange Gradient Background */
+
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Update User</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
     body {
       min-height: 100vh;
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #e6fff0, #bfffd8, #deffe9); /* light green gradient */
       display: flex;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(-45deg, #7c3aed, #fb923c, #f97316, #8b5cf6);
-      background-size: 400% 400%;
-      animation: gradientShift 10s ease infinite;
+      padding: 20px;
     }
 
-    @keyframes gradientShift {
-      0% {
-        background-position: 0% 50%;
-      }
-      50% {
-        background-position: 100% 50%;
-      }
-      100% {
-        background-position: 0% 50%;
-      }
-    }
-
-    /* Glassmorphism Form Container */
-    .form-container {
-      width: 420px;
+    .glass-container {
+      width: 100%;
+      max-width: 480px;
       padding: 40px;
+      background: rgba(240, 255, 245, 0.75);
+      backdrop-filter: blur(16px);
       border-radius: 20px;
-      background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(15px);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      animation: fadeIn 1.2s ease;
+      box-shadow: 0 12px 28px rgba(51, 214, 132, 0.25);
+      border: 1px solid rgba(182, 255, 193, 0.5);
+      text-align: center;
+      animation: fadeIn 0.6s ease-in-out;
     }
 
     @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .form-container h1 {
-      text-align: center;
-      margin-bottom: 10px;
+    .glass-container h1 {
       font-size: 2em;
-      font-weight: 700;
+      font-weight: 600;
+      color: #33d684; /* green */
+      margin-bottom: 30px;
       letter-spacing: 1px;
-      color: #fff;
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    }
-
-    /* Inputs and Select */
-    .form-group {
-      position: relative;
     }
 
     .form-group input,
     .form-group select {
       width: 100%;
-      padding: 12px 45px 12px 15px;
-      font-size: 1em;
-      border-radius: 10px;
-      border: none;
-      outline: none;
-      background: rgba(255, 255, 255, 0.9);
-      color: #333;
+      padding: 12px 14px;
+      border: 1px solid #ccffe0;
+      border-radius: 12px;
+      font-size: 14px;
+      background: #f0fff5;
+      color: #2bb36b; /* dark green text */
       transition: 0.3s ease;
+      box-sizing: border-box;
+      box-shadow: inset 0 2px 6px rgba(182, 255, 193, 0.25);
     }
 
     .form-group input:focus,
     .form-group select:focus {
-      box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.7);
+      border-color: #33d684;
+      box-shadow: 0 0 8px rgba(51, 214, 132, 0.4);
+      outline: none;
     }
 
-    /* Eye Icon */
     .toggle-password {
       position: absolute;
-      right: 15px;
+      right: 14px;
       top: 50%;
       transform: translateY(-50%);
       cursor: pointer;
       font-size: 1.1em;
-      color: #9333ea;
-      transition: color 0.3s;
+      color: #33d684;
     }
 
-    .toggle-password:hover {
-      color: #fb923c;
-    }
-
-    /* Buttons */
     .btn-submit {
       width: 100%;
       padding: 14px;
-      background: linear-gradient(135deg, #7c3aed, #fb923c);
-      color: #fff;
       border: none;
-      border-radius: 10px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #4dff94, #33d684); /* green gradient */
+      color: #fff;
       font-size: 1.1em;
-      font-weight: 600;
+      font-weight: 500;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
     .btn-submit:hover {
-      background: linear-gradient(135deg, #5b21b6, #f97316);
-      transform: translateY(-3px);
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(51, 214, 132, 0.35);
     }
 
     .btn-return {
-      display: block;
-      text-align: center;
-      margin-top: 10px;
-      padding: 12px;
-      background: rgba(255, 255, 255, 0.2);
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 22px;
+      background: #33d684;
       color: #fff;
       border-radius: 10px;
       text-decoration: none;
       font-weight: 500;
-      transition: all 0.3s ease;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
     .btn-return:hover {
-      background: linear-gradient(135deg, #8b5cf6, #f97316);
-      transform: translateY(-3px);
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(51, 214, 132, 0.3);
+      background: #2bb36b;
     }
   </style>
-</head>
 
-<body>
-  <div class="form-container">
-    <h1>Update User</h1>
-    <form action="<?=site_url('users/update/'.$user['id'])?>" method="POST">
-      <div class="form-group">
-        <input type="text" name="username" value="<?=html_escape($user['username']);?>" placeholder="Username" required>
-      </div>
-
-      <div class="form-group">
-        <input type="email" name="email" value="<?=html_escape($user['email']);?>" placeholder="Email" required>
-      </div>
-
-      <div class="form-group">
-        <input type="password" placeholder="Password" name="password" id="password">
-        <i class="fa-solid fa-eye toggle-password" id="togglePassword"></i>
-      </div>
-
-      <?php if(!empty($logged_in_user) && $logged_in_user['role'] === 'admin'): ?>
+  </head>
+  <body>
+    <div class="glass-container">
+      <h1>Update User</h1>
+      <form action="<?=site_url('users/update/'.$user['id'])?>" method="POST">
         <div class="form-group">
-          <select name="role" required>
-            <option value="user" <?= $user['role'] === 'user' ? 'selected' : ''; ?>>User</option>
-            <option value="admin" <?= $user['role'] === 'admin' ? 'selected' : ''; ?>>Admin</option>
-          </select>
+          <input type="text" name="username" value="<?=html_escape($user['username']);?>" placeholder="Username" required>
         </div>
-      <?php endif; ?>
+        <div class="form-group">
+          <input type="email" name="email" value="<?=html_escape($user['email']);?>" placeholder="Email" required>
+        </div>
 
-      <button type="submit" class="btn-submit">Update User</button>
-    </form>
-    <a href="<?=site_url('/users');?>" class="btn-return">Return to Home</a>
-  </div>
+        <?php if(!empty($logged_in_user) && $logged_in_user['role'] === 'admin'): ?>
+          <div class="form-group">
+            <select name="role" required>
+              <option value="user" <?= $user['role'] === 'user' ? 'selected' : ''; ?>>User</option>
+              <option value="admin" <?= $user['role'] === 'admin' ? 'selected' : ''; ?>>Admin</option>
+            </select>
+          </div>
 
-  <script>
-    const togglePassword = document.querySelector('#togglePassword');
-    const password = document.querySelector('#password');
-    togglePassword.addEventListener('click', function () {
-      const type = password.type === 'password' ? 'text' : 'password';
-      password.type = type;
-      this.classList.toggle('fa-eye');
-      this.classList.toggle('fa-eye-slash');
-    });
-  </script>
-</body>
-</html>
+          <div class="form-group">
+            <input type="password" placeholder="New Password (leave blank if unchanged)" 
+                  name="password" id="password">
+            <i class="fa-solid fa-eye toggle-password" id="togglePassword"></i>
+          </div>
+        <?php endif; ?>
+
+        <button type="submit" class="btn-submit">Update User</button>
+      </form>
+      <a href="<?=site_url('/users');?>" class="btn-return">Cancel</a>
+    </div>
+
+    <script>
+      const togglePassword = document.querySelector('#togglePassword');
+      const password = document.querySelector('#password');
+
+      if (togglePassword) {
+        togglePassword.addEventListener('click', function () {
+          const type = password.type === 'password' ? 'text' : 'password';
+          password.type = type;
+
+          this.classList.toggle('fa-eye');
+          this.classList.toggle('fa-eye-slash');
+        });
+      }
+    </script>
+  </body>
+  </html>
