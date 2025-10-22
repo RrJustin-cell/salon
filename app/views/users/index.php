@@ -152,19 +152,30 @@
         </tr>
       </thead>
       <tbody>
-        <?php foreach ($users as $user): ?>
-          <tr>
-            <td><?= $user['id']; ?></td>
-            <td><?= htmlspecialchars($user['username']); ?></td>
-            <td><?= htmlspecialchars($user['email']); ?></td>
-            <td><?= htmlspecialchars($user['role']); ?></td>
-            <td class="actions">
-              <a href="<?= site_url('users/edit/'.$user['id']); ?>"><i class="fa fa-pen"></i> Edit</a>
-              <a href="<?= site_url('users/delete/'.$user['id']); ?>" onclick="return confirm('Are you sure?')"><i class="fa fa-trash"></i> Delete</a>
-            </td>
-          </tr>
-        <?php endforeach; ?>
-      </tbody>
+<?php if (is_array($users) && count($users) > 0): ?>
+  <?php foreach ($users as $user): ?>
+    <tr>
+      <td><?= htmlspecialchars($user['id']); ?></td>
+      <td><?= htmlspecialchars($user['username']); ?></td>
+      <td><?= htmlspecialchars($user['email']); ?></td>
+      <td><?= htmlspecialchars($user['role']); ?></td>
+      <td class="actions">
+        <!-- support both URL styles in views: use update (preferred) OR edit (if older code expects it) -->
+        <a href="<?= site_url('/users/update/'.$user['id']);?>">Update</a>
+        <a href="<?= site_url('/users/edit/'.$user['id']);?>">Edit</a>
+        <a href="<?= site_url('/users/delete/'.$user['id']);?>" onclick="return confirm('Are you sure?')">Delete</a>
+      </td>
+    </tr>
+  <?php endforeach; ?>
+<?php else: ?>
+  <tr>
+    <td colspan="5" style="text-align:center; padding:20px;">
+      No users found or a database error occurred.
+    </td>
+  </tr>
+<?php endif; ?>
+</tbody>
+
     </table>
   </div>
 
