@@ -1,194 +1,199 @@
+create
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Create User</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Poppins", sans-serif;
-    }
+ <style>
+  body {
+    min-height: 100vh;
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(135deg, #e6fff0, #bfffd8, #deffe9); /* light green gradient */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
 
-    /* === Animated Violet-Orange Gradient Background === */
-    section {
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      height: 100vh;
-      overflow: hidden;
-      background: linear-gradient(-45deg, #a855f7, #fb923c, #7c3aed, #f97316);
-      background-size: 400% 400%;
-      animation: gradientMove 10s ease infinite;
-    }
+  .glass-container {
+    width: 100%;
+    max-width: 480px;
+    padding: 40px;
+    background: rgba(240, 255, 245, 0.75);
+    backdrop-filter: blur(16px);
+    border-radius: 20px;
+    box-shadow: 0 12px 28px rgba(51, 214, 132, 0.25);
+    border: 1px solid rgba(182, 255, 193, 0.5);
+    text-align: center;
+  }
 
-    @keyframes gradientMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+  h2 {
+    font-size: 2em;
+    font-weight: 600;
+    color: #33d684; /* green */
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+  }
 
-    /* === Hide old images & leaves === */
-    section .bg,
-    section .trees,
-    .leaves {
-      display: none;
-    }
+  .form-group input,
+  .form-group select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #ccffe0;
+    border-radius: 12px;
+    font-size: 14px;
+    background: #f0fff5;
+    color: #2bb36b; /* dark green text */
+    transition: 0.3s ease;
+    box-sizing: border-box;
+    box-shadow: inset 0 2px 6px rgba(182, 255, 193, 0.25);
+  }
 
-    /* === Glassmorphism Form === */
-    .login {
-      position: relative;
-      padding: 60px;
-      background: rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      border-radius: 20px;
-      width: 500px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
-      z-index: 200;
-    }
+  .form-group input:focus,
+  .form-group select:focus {
+    border-color: #33d684;
+    box-shadow: 0 0 8px rgba(51, 214, 132, 0.4);
+    outline: none;
+  }
 
-    .login h2 {
-      text-align: center;
-      font-size: 2.5em;
-      font-weight: 600;
-      color: #6d28d9;
-      margin-bottom: 10px;
-    }
+  .toggle-password {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 1.1em;
+    color: #33d684;
+  }
 
-    /* === Input Fields === */
-    .login .inputBox input,
-    .login .inputBox select {
-      width: 100%;
-      padding: 15px 20px;
-      outline: none;
-      font-size: 1.1em;
-      color: #4c1d95;
-      border-radius: 5px;
-      background: #fff;
-      border: none;
-      margin-bottom: 20px;
-    }
+  .btn-submit {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #4dff94, #33d684); /* green gradient */
+    color: #fff;
+    font-size: 1.1em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
 
-    .login .inputBox ::placeholder {
-      color: #6d28d9;
-    }
+  .btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(51, 214, 132, 0.35);
+  }
 
-    /* === Button === */
-    .login .inputBox #btn {
-      width: 100%;
-      padding: 15px;
-      border: none;
-      outline: none;
-      background: linear-gradient(135deg, #7c3aed, #f97316);
-      color: #fff;
-      cursor: pointer;
-      font-size: 1.25em;
-      font-weight: 500;
-      border-radius: 5px;
-      transition: 0.4s;
-    }
+  .btn-return {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 22px;
+    background: #33d684;
+    color: #fff;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
 
-    .login .inputBox #btn:hover {
-      background: linear-gradient(135deg, #5b21b6, #ea580c);
-      transform: scale(1.02);
-    }
+  .btn-return:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(51, 214, 132, 0.3);
+    background: #2bb36b;
+  }
 
-    /* === Text Links === */
-    .group {
-      text-align: center;
-    }
+  .error-message {
+    background: #f0fff5;
+    color: #2bb36b;
+    border: 1px solid #ccffe0;
+    padding: 10px 15px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 0.9em;
+  }
+</style>
 
-    .group a {
-      font-size: 1em;
-      color: #5b21b6;
-      font-weight: 500;
-      text-decoration: none;
-    }
-
-    .group a:hover {
-      text-decoration: underline;
-    }
-
-    /* === Error Box === */
-    .error-box {
-      background: rgba(255, 0, 0, 0.1);
-      color: #d64c42;
-      padding: 12px 16px;
-      border: 1px solid #f5c2c7;
-      border-radius: 6px;
-      margin-bottom: 16px;
-      margin-top: 10px;
-      text-align: center;
-      font-size: 15px;
-    }
-
-    /* === Eye Icon === */
-    .fa-eye, .fa-eye-slash {
-      color: #6d28d9;
-    }
-  </style>
 </head>
 <body>
-  <section>
-    <!-- Create Form -->
-    <div class="login">
-      <h2>Create User</h2>
+  <div class="glass-container">
+    <h2>Create User</h2>
 
-      <?php if (!empty($error)): ?>
-        <div class="error-box">
-          <?= htmlspecialchars($error) ?>
-        </div>
-      <?php endif; ?>
+    <?php if (!empty($error)): ?>
+      <div class="error-message"><?= $error ?></div>
+    <?php endif; ?>
 
-      <form method="POST" action="<?= site_url('users/create'); ?>" class="inputBox" onsubmit="return validatePasswords()">
-        <input type="text" name="username" placeholder="Username" required>
-        <input type="email" name="email" placeholder="Email" required>
+    <form method="post" action="<?= site_url('users/create'); ?>">
+      <div class="form-group">
+        <input 
+          type="text" 
+          name="username" 
+          placeholder="Username" 
+          required
+          value="<?= isset($username) ? html_escape($username) : '' ?>"
+        >
+      </div>
 
-        <!-- Password -->
-        <div style="position: relative;">
-          <input type="password" id="password" name="password" placeholder="Password" required
-            style="width: 100%; padding: 15px 45px 15px 20px; border-radius: 5px; border: none; font-size: 1.1em;">
-          <i class="fa-solid fa-eye" id="togglePassword"
-            style="position: absolute; right: 15px; top: 35%; transform: translateY(-50%); cursor: pointer;"></i>
-        </div>
+      <div class="form-group">
+        <input 
+          type="email" 
+          name="email" 
+          placeholder="Email" 
+          required
+          value="<?= isset($email) ? html_escape($email) : '' ?>"
+        >
+      </div>
 
-        <!-- Confirm Password -->
-        <div style="position: relative;">
-          <input type="password" id="confirmPassword" name="confirm_password" placeholder="Confirm Password" required
-            style="width: 100%; padding: 15px 45px 15px 20px; border-radius: 5px; border: none; font-size: 1.1em;">
-          <i class="fa-solid fa-eye" id="toggleConfirmPassword"
-            style="position: absolute; right: 15px; top: 35%; transform: translateY(-50%); cursor: pointer;"></i>
-        </div>
+      <div class="form-group">
+        <input 
+          type="password" 
+          name="password" 
+          id="password" 
+          placeholder="Password" 
+          required
+        >
+        <i class="fa-solid fa-eye toggle-password" id="togglePassword"></i>
+      </div>
 
-        <!-- Role -->
+      <div class="form-group">
+        <input 
+          type="password" 
+          name="confirm_password" 
+          id="confirmPassword" 
+          placeholder="Confirm Password" 
+          required
+        >
+        <i class="fa-solid fa-eye toggle-password" id="toggleConfirmPassword"></i>
+      </div>
+
+      <div class="form-group">
         <select name="role" required>
-          <option value="user" selected>User</option>
-          <option value="admin">Admin</option>
+          <option value="">-- Select Role --</option>
+          <option value="admin" <?= isset($role) && $role=="admin" ? 'selected' : '' ?>>Admin</option>
+          <option value="user" <?= isset($role) && $role=="user" ? 'selected' : '' ?>>User</option>
         </select>
+      </div>
 
-        <button type="submit" id="btn">Create User</button>
-      </form>
-    </div>
-  </section>
+      <button type="submit" class="btn-submit">Create User</button>
+    </form>
+
+    <a href="<?= site_url('users'); ?>" class="btn-return">Back</a>
+  </div>
 
   <script>
-    // Toggle password visibility
     function toggleVisibility(toggleId, inputId) {
       const toggle = document.getElementById(toggleId);
       const input = document.getElementById(inputId);
+
       toggle.addEventListener('click', function () {
-        const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
-        input.setAttribute('type', type);
+        const type = input.type === 'password' ? 'text' : 'password';
+        input.type = type;
         this.classList.toggle('fa-eye');
         this.classList.toggle('fa-eye-slash');
       });
@@ -196,17 +201,6 @@
 
     toggleVisibility('togglePassword', 'password');
     toggleVisibility('toggleConfirmPassword', 'confirmPassword');
-
-    // Validate password match
-    function validatePasswords() {
-      const pw = document.getElementById('password').value;
-      const cpw = document.getElementById('confirmPassword').value;
-      if (pw !== cpw) {
-        alert("Passwords do not match!");
-        return false;
-      }
-      return true;
-    }
   </script>
 </body>
 </html>
