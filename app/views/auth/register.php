@@ -1,4 +1,4 @@
-register
+
 
 <!DOCTYPE html>
 <html lang="en">
